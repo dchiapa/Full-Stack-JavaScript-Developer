@@ -1,15 +1,15 @@
-const listaMascotas = document.getElementById("listaMascotas");
-let mascotas = [{ tipo: "Gato", nombre: "Tigresa", dueno: "Diego" }];
+const petList = document.getElementById("petList");
+let pets = [{ tipo: "Gato", nombre: "Tigresa", dueno: "Diego" }];
 
-const listarMascotas = () => {
-  const htmlMascotas = mascotas
+const renderPets = () => {
+  const htmlPets = pets
     .map(
-      (mascota, indice) => `
+      (pet, index) => `
     <tr>
-      <th scope="row">${indice}</th>
-      <td>${mascota.tipo}</td>
-      <td>${mascota.nombre}</td>
-      <td>${mascota.dueno}</td>
+      <th scope="row">${index}</th>
+      <td>${pet.tipo}</td>
+      <td>${pet.nombre}</td>
+      <td>${pet.dueno}</td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-info">
@@ -23,7 +23,7 @@ const listarMascotas = () => {
     </tr>`
     )
     .join("");
-  listaMascotas.innerHTML = htmlMascotas;
+  petList.innerHTML = htmlPets;
 };
 
-listarMascotas();
+renderPets();
