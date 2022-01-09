@@ -74,6 +74,7 @@
         </div>
       </nav>
       <div class="actions-menu">
+        <h1>Mascotas</h1>
         <button
           type="button"
           class="btn btn-primary"
@@ -87,30 +88,13 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Dueño</th>
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-info">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button type="button" class="btn btn-danger">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+        <tbody id="listaMascotas"></tbody>
       </table>
     </div>
 
@@ -144,11 +128,10 @@
                 <div class="col">
                   <select class="form-control" id="exampleFormControlSelect1">
                     <option>Tipo de animal</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option>Perro</option>
+                    <option>Gato</option>
+                    <option>Ave</option>
+                    <option>Otro</option>
                   </select>
                 </div>
               </div>
@@ -156,16 +139,19 @@
                 <div class="col">
                   <input
                     type="text"
+                    name="nombre"
                     class="form-control"
-                    placeholder="First name"
+                    placeholder="Nombre"
                   />
                 </div>
                 <div class="col">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Last name"
-                  />
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Dueño</option>
+                    <option>Diego</option>
+                    <option>Juan</option>
+                    <option>Pablo</option>
+                    <option>Sebastian</option>
+                  </select>
                 </div>
               </div>
             </form>
@@ -201,5 +187,7 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+    <!-- My SCRIPT -->
+    <script src="./js/mascotas.js"></script>
   </body>
 </html>
