@@ -24,7 +24,6 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="./css/styles.css" />
 
-    <link rel="stylesheet" href="./css/styles.css" />
     <title>Veterinaria</title>
   </head>
   <body>
@@ -43,7 +42,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
+        <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="./index.html">
@@ -73,13 +72,13 @@
           </form>
         </div>
       </nav>
-      <div class="actions-menu">
+      <div class="actionsMenu">
         <h1>Mascotas</h1>
         <button
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
-          data-target="#exampleModalCenter"
+          data-target="#modalNewPet"
         >
           Nueva
         </button>
@@ -101,7 +100,7 @@
     <!-- Ventana modal -->
     <div
       class="modal fade"
-      id="exampleModalCenter"
+      id="modalNewPet"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -110,9 +109,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">
-              Nueva mascota
-            </h5>
+            <h5 class="modal-title">Nueva mascota</h5>
             <button
               type="button"
               class="close"
@@ -123,10 +120,11 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="formNewPet">
+              <input type="hidden" id="petIndex" />
               <div class="form-row">
                 <div class="col">
-                  <select class="form-control" id="exampleFormControlSelect1">
+                  <select class="form-control" id="petType">
                     <option>Tipo de animal</option>
                     <option>Perro</option>
                     <option>Gato</option>
@@ -139,13 +137,13 @@
                 <div class="col">
                   <input
                     type="text"
-                    name="nombre"
+                    id="petName"
                     class="form-control"
                     placeholder="Nombre"
                   />
                 </div>
                 <div class="col">
-                  <select class="form-control" id="exampleFormControlSelect1">
+                  <select class="form-control" id="petOwner">
                     <option>Dueño</option>
                     <option>Diego</option>
                     <option>Juan</option>
@@ -162,9 +160,16 @@
               class="btn btn-secondary"
               data-dismiss="modal"
             >
-              Close
+              Cerrar
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              id="btnNewPet"
+            >
+              Guardar cambios
+            </button>
           </div>
         </div>
       </div>
