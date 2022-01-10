@@ -65,7 +65,12 @@ const submitData = () => {
   closePet();
   renderPets();
 };
-const deletePet = (index) => () => console.log("delete", index);
+const deletePet = (index) => {
+  return () => {
+    pets.splice(index, 1);
+    renderPets();
+  };
+};
 const closePet = () => {
   formPetIndex.value = "";
   formPet.reset();
