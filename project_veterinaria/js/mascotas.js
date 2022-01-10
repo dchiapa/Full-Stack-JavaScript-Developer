@@ -3,8 +3,8 @@ const petIndex = document.getElementById("petIndex");
 const petType = document.getElementById("petType");
 const petName = document.getElementById("petName");
 const petOwner = document.getElementById("petOwner");
-const formPet = document.getElementById("formNewPet");
-const btnPet = document.getElementById("btnNewPet");
+const formPet = document.getElementById("formPet");
+const btnPet = document.getElementById("btnPet");
 
 let pets = [{ type: "Gato", name: "Tigresa", owner: "Diego" }];
 
@@ -31,8 +31,8 @@ const renderPets = () => {
     )
     .join("");
   petList.innerHTML = htmlPets;
-  Array.from(document.getElementsByClassName("btnEditPet")).forEach((btn) =>
-    btn.addEventListener("click", editPet)
+  Array.from(document.getElementsByClassName("btnEditPet")).forEach(
+    (btn, index) => btn.addEventListener("click", editPet(index))
   );
 };
 
@@ -47,9 +47,10 @@ const addPet = (e) => {
   renderPets();
   formPet.reset();
 };
-const editPet = (e) => {
-  //! Ojo si se hace click sobre el icono y no sobre el boton
-  console.log(e);
+const editPet = (index) => {
+  return () => {
+    console.log("edit", index);
+  };
 };
 
 formPet.addEventListener("submit", (e) => addPet(e));
