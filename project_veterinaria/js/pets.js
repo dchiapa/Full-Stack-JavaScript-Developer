@@ -27,7 +27,7 @@ const renderPets = () => {
           data-target="#modalPet">
             <i class="fas fa-edit"></i>
           </button>
-          <button type="button" class="btn btn-danger">
+          <button type="button" class="btn btn-danger btnDeletePet">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -38,6 +38,9 @@ const renderPets = () => {
   petList.innerHTML = htmlPets;
   Array.from(document.getElementsByClassName("btnEditPet")).forEach(
     (btn, index) => btn.addEventListener("click", openEditPet(index))
+  );
+  Array.from(document.getElementsByClassName("btnDeletePet")).forEach(
+    (btn, index) => btn.addEventListener("click", deletePet(index))
   );
 };
 const openEditPet = (index) => {
@@ -62,7 +65,7 @@ const submitData = () => {
   closePet();
   renderPets();
 };
-
+const deletePet = (index) => () => console.log("delete", index);
 const closePet = () => {
   formPetIndex.value = "";
   formPet.reset();
