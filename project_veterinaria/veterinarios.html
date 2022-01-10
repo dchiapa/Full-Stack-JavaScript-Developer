@@ -14,6 +14,13 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <!-- Font Awesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
     <!-- My CSS -->
     <link rel="stylesheet" href="./css/styles.css" />
 
@@ -27,15 +34,16 @@
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarColor01"
-          aria-controls="navbarColor01"
+          data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="./index.html"> Mascotas </a>
             </li>
@@ -51,20 +59,119 @@
               <a class="nav-link" href="./duenos.html">Dueños</a>
             </li>
           </ul>
-          <form class="form-inline">
+          <form class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
-              aria-label="Search"
             />
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
               Search
             </button>
           </form>
         </div>
       </nav>
-      <h1>Veterinarios</h1>
+      <div class="actionsMenu">
+        <h1>Veterinarios</h1>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modalVeterinary"
+        >
+          Agregar veterinario
+        </button>
+      </div>
+      <table class="table table-stripped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Pais</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="veterinariesList"></tbody>
+      </table>
+    </div>
+
+    <!-- Ventana modal -->
+    <div
+      class="modal fade"
+      id="modalVeterinary"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Nuevo veterinario</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="formVeterinary">
+              <input type="hidden" id="veterinaryIndex" />
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    id="veterinaryFirstName"
+                    class="form-control"
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    id="veterinaryLastName"
+                    class="form-control"
+                    placeholder="Apellido"
+                  />
+                </div>
+                <div class="col">
+                  <select class="form-control" id="veterinaryCountry">
+                    <option>País</option>
+                    <option>Argentina</option>
+                    <option>Uruguay</option>
+                    <option>Colombia</option>
+                    <option>Venezuela</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              id="btnCloseVeterinary"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              id="btnSaveVeterinary"
+            >
+              Guardar cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -82,5 +189,7 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+    <!-- My SCRIPT -->
+    <script src="./js/veterinaries.js"></script>
   </body>
 </html>
