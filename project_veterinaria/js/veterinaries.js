@@ -12,13 +12,13 @@ const btnSaveVeterinary = document.getElementById("btnSaveVeterinary");
 
 let veterinaries = [
   {
-    identification: "",
+    identification: "123456789",
     firstName: "Diego",
     lastName: "Chiapa",
     country: "Argentina",
   },
   {
-    identification: "",
+    identification: "345678912",
     firstName: "Juan",
     lastName: "Castillejo",
     country: "Uruguay",
