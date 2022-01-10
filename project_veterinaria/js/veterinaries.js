@@ -1,6 +1,9 @@
 const veterinariesList = document.getElementById("veterinariesList");
 const formVeterinary = document.getElementById("formVeterinary");
 const formVeterinaryIndex = document.getElementById("veterinaryIndex");
+const formVeterinaryIdentification = document.getElementById(
+  "veterinaryIdentification"
+);
 const formVeterinaryFirstName = document.getElementById("veterinaryFirstName");
 const formVeterinaryLastName = document.getElementById("veterinaryLastName");
 const formVeterinaryCountry = document.getElementById("veterinaryCountry");
@@ -8,8 +11,18 @@ const btnCloseVeterinary = document.getElementById("btnCloseVeterinary");
 const btnSaveVeterinary = document.getElementById("btnSaveVeterinary");
 
 let veterinaries = [
-  { firstName: "Diego", lastName: "Chiapa", country: "Argentina" },
-  { firstName: "Juan", lastName: "Castillejo", country: "Uruguay" },
+  {
+    identification: "",
+    firstName: "Diego",
+    lastName: "Chiapa",
+    country: "Argentina",
+  },
+  {
+    identification: "",
+    firstName: "Juan",
+    lastName: "Castillejo",
+    country: "Uruguay",
+  },
 ];
 
 const renderVeterinaries = () => {
@@ -18,6 +31,7 @@ const renderVeterinaries = () => {
       (veterinary, index) => `
     <tr>
       <th scope="row">${index}</th>
+      <td>${veterinary.identification}</td>
       <td>${veterinary.firstName}</td>
       <td>${veterinary.lastName}</td>
       <td>${veterinary.country}</td>
@@ -46,6 +60,7 @@ const renderVeterinaries = () => {
 const openEditVeterinary = (index) => {
   return () => {
     formVeterinaryIndex.value = index;
+    formVeterinaryIdentification.value = veterinaries[index].identification;
     formVeterinaryFirstName.value = veterinaries[index].firstName;
     formVeterinaryLastName.value = veterinaries[index].lastName;
     formVeterinaryCountry.value = veterinaries[index].country;
@@ -53,6 +68,7 @@ const openEditVeterinary = (index) => {
 };
 const submitData = () => {
   const veterinaryData = {
+    identification: formVeterinaryIdentification.value,
     firstName: formVeterinaryFirstName.value,
     lastName: formVeterinaryLastName.value,
     country: formVeterinaryCountry.value,
