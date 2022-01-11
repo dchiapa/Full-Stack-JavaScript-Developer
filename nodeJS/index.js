@@ -2,7 +2,7 @@ const http = require("http");
 const url = require("url");
 const stringDecoder = require("string_decoder").StringDecoder;
 
-const serverRecuestListener = (req, res) => {
+const serverRequestListener = (req, res) => {
   // 1 get url
   const originalURL = req.url;
   const parsedURL = url.parse(originalURL, true);
@@ -34,7 +34,7 @@ const serverRecuestListener = (req, res) => {
   });
 };
 
-const server = http.createServer(serverRecuestListener);
+const server = http.createServer(serverRequestListener);
 
 server.listen(5000, () => {
   console.log("Server running on localhost:5000");
