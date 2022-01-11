@@ -5,8 +5,9 @@ const serverRecuestListener = (req, res) => {
   // 1 get url
   const originalURL = req.url;
   const parsedURL = url.parse(originalURL, true);
-  console.log({ originalURL, parsedURL });
   // 2 get route
+  const route = parsedURL.pathname;
+  console.log(route);
   // 3 send response about route
   res.end("Hello World");
 };
