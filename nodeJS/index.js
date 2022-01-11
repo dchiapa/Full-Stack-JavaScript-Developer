@@ -5,12 +5,15 @@ const serverRecuestListener = (req, res) => {
   // 1 get url
   const originalURL = req.url;
   const parsedURL = url.parse(originalURL, true);
-  // 2 get route
+  // 1.1 get route
   const route = parsedURL.pathname;
-  // 3 get method
+  // 1.2 get method
   const method = req.method.toLowerCase();
-  console.log(`method: ${method}`);
-  // 4 send response about route
+  // 1.3 get queries
+  const queryString = parsedURL.search.replace("?", "");
+  const queries = queryString.split("&");
+  console.log(`queries: ${queries}`);
+  // 2 send response about route
   const responses = {
     "/": "Hola mundo desde nodeJS",
   };
