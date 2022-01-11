@@ -1,5 +1,6 @@
 const http = require("http");
 const url = require("url");
+const stringDecoder = require("string_decoder").StringDecoder;
 
 const serverRecuestListener = (req, res) => {
   // 1 get url
@@ -13,11 +14,24 @@ const serverRecuestListener = (req, res) => {
   const { query = {} } = parsedURL;
   // 1.4 get headers
   const { headers = {} } = req;
-  // 2 send response about route
-  const responses = {
-    "/": "Hola mundo desde nodeJS",
-  };
-  res.end(responses[route] || "No se encontro la ruta");
+  // 1.5 get payload
+  // 1.5.1 declare a decoder and buffer
+  const decoder = new stringDecoder("utf-8");
+  let buffer = "";
+  // 1.5.2 get payload
+  // on data event add data decoded to buffer
+  req.on("data", (data) => {
+    buffer += decoder.write(data);
+  });
+  // 1.5.3 on end event
+  req.on("end", () => {
+    buffer += decoder.end();
+    // 2 send response about route
+    const responses = {
+      "/": "Hola mundo desde nodeJS",
+    };
+    res.end(responses[route] || "No se encontro la ruta");
+  });
 };
 
 const server = http.createServer(serverRecuestListener);
