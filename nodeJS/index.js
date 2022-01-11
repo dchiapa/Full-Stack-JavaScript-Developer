@@ -11,7 +11,8 @@ const serverRecuestListener = (req, res) => {
   const method = req.method.toLowerCase();
   // 1.3 get query
   const { query = {} } = parsedURL;
-
+  // 1.4 get headers
+  const { headers = {} } = req;
   // 2 send response about route
   const responses = {
     "/": "Hola mundo desde nodeJS",
