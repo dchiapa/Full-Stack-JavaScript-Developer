@@ -7,9 +7,10 @@ const serverRecuestListener = (req, res) => {
   const parsedURL = url.parse(originalURL, true);
   // 2 get route
   const route = parsedURL.pathname;
-  console.log(route);
   // 3 send response about route
-  res.end("Hello World");
+  route === "/"
+    ? res.end("Hola mundo desde nodeJS")
+    : res.end("No se encontro la ruta");
 };
 
 const server = http.createServer(serverRecuestListener);
