@@ -15,6 +15,7 @@ Las primeras secciones del curso no se han subido, dado que es contenido que ya 
 - #9: App veterinaria parte 1.
 - #10: Introducción a NODE.
 - #11: Primeros pasos con NODEJS.
+- #12: App veterinaria parte 2: API rest, NODE puro.
 
 ## Proyecto veterinaria
 
