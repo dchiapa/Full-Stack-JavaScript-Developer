@@ -26,6 +26,7 @@ const serverRequestListener = (req, res) => {
   // 1.5.3 on end event
   req.on("end", () => {
     buffer += decoder.end();
+
     // 2 organize data
     const data = {
       route,
@@ -35,14 +36,35 @@ const serverRequestListener = (req, res) => {
       payload: buffer,
     };
 
-    // 3 send response about route
+    // 3 handle the route
+    let handler;
+    if (route && responses[route]) {
+      handler = responses[route];
+    } else {
+      handler = responses.notFound;
+    }
 
-    res.end(responses[route] || "No se encontro la ruta");
+    // 4 send response about route
+    if (typeof handler === "function") {
+      handler(data, (statusCode, message) => {
+        const response = JSON.stringify(message);
+        res.writeHead(statusCode);
+        res.end(response);
+      });
+    }
   });
 };
 
 const responses = {
-  "/": "Hola mundo desde nodeJS",
+  "/": (data, callback) => {
+    callback(200, { message: "Estas en /" });
+  },
+  "/usuarios": (data, callback) => {
+    callback(200, [{ nombre: "Juan" }, { nombre: "Pedro" }]);
+  },
+  notFound: (data, callback) => {
+    callback(404, { message: "No se encontro la ruta" });
+  },
 };
 
 const server = http.createServer(serverRequestListener);
