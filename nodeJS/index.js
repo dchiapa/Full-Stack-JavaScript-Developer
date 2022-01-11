@@ -26,12 +26,23 @@ const serverRequestListener = (req, res) => {
   // 1.5.3 on end event
   req.on("end", () => {
     buffer += decoder.end();
-    // 2 send response about route
-    const responses = {
-      "/": "Hola mundo desde nodeJS",
+    // 2 organize data
+    const data = {
+      route,
+      method,
+      query,
+      headers,
+      payload: buffer,
     };
+
+    // 3 send response about route
+
     res.end(responses[route] || "No se encontro la ruta");
   });
+};
+
+const responses = {
+  "/": "Hola mundo desde nodeJS",
 };
 
 const server = http.createServer(serverRequestListener);
