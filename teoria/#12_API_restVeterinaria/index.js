@@ -2,6 +2,12 @@ const http = require("http");
 const url = require("url");
 const stringDecoder = require("string_decoder").StringDecoder;
 
+let resources = {
+  pets: [
+    { type: "Gato", name: "Tigresa", owner: "Diego" },
+    { type: "Perro", name: "Firulais", owner: "Juan" },
+  ],
+};
 const serverRequestListener = (req, res) => {
   // 1 get url
   const originalURL = req.url;
@@ -60,8 +66,8 @@ const responses = {
   "/": (data, callback) => {
     callback(200, { message: "Estas en /" });
   },
-  "/usuarios": (data, callback) => {
-    callback(200, [{ nombre: "Juan" }, { nombre: "Pedro" }]);
+  "/mascotas": (data, callback) => {
+    callback(200, resources.pets);
   },
   notFound: (data, callback) => {
     callback(404, { message: "No se encontro la ruta" });
