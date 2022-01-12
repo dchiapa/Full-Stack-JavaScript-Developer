@@ -36,9 +36,15 @@ const serverRequestListener = (req, res) => {
     if (headers["content-type"] === "application/json") {
       buffer = JSON.parse(buffer);
     }
-    // 2.2 organize data
+    // 2.2 if route contains a parameter
+    // get the route clean and the parameter
+    if (route.indexOf("/")) {
+      var [routeClean, index = null] = route.split("/");
+    }
+    // 2.3 organize data
     const data = {
-      route,
+      route: routeClean ? routeClean : route,
+      index,
       method,
       query,
       headers,
