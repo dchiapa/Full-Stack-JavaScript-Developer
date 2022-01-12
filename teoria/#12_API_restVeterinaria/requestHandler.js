@@ -3,39 +3,33 @@ const stringDecoder = require("string_decoder").StringDecoder;
 const router = require("./router");
 
 module.exports = (req, res) => {
-  // 1 get url
+  //* get data from the request
   const originalURL = req.url;
   const parsedURL = url.parse(originalURL, true);
-  // 1.1 get route
   const route = parsedURL.pathname.slice(1);
-  // 1.2 get method
   const method = req.method.toLowerCase();
-  // 1.3 get query
   const { query = {} } = parsedURL;
-  // 1.4 get headers
   const { headers = {} } = req;
-  // 1.5 get payload
-  // 1.5.1 declare a decoder and buffer
   const decoder = new stringDecoder("utf-8");
   let buffer = "";
-  // 1.5.2 get payload
-  // on data event add data decoded to buffer
+  //* on beginning of the request
   req.on("data", (data) => {
+    //* buffer data accumulating
     buffer += decoder.write(data);
   });
-  // 1.5.3 on end event
+  //* on end of the request
   req.on("end", () => {
+    //* buffer stop data accumulating
     buffer += decoder.end();
-    // 2.1 parse buffer about content type
+    //* parsing buffer data
     if (headers["content-type"] === "application/json") {
       buffer = JSON.parse(buffer);
     }
-    // 2.2 if route contains a parameter
-    // get the route clean and the parameter
+    //* split the request into a route and an index
     if (route.indexOf("/")) {
       var [routeClean, index = null] = route.split("/");
     }
-    // 2.3 organize data
+    //* ordered data
     const data = {
       route: routeClean ? routeClean : route,
       index,
@@ -44,16 +38,14 @@ module.exports = (req, res) => {
       headers,
       payload: buffer,
     };
-    console.log(data);
-    // 3 handle the route
+    //* declare a handler function
     let handler;
     if (data.route && router[data.route][method]) {
       handler = router[data.route][method];
     } else {
       handler = router.notFound;
     }
-
-    // 4 send response about route
+    //* ejecution the handler function
     if (typeof handler === "function") {
       handler(data, (statusCode, message) => {
         const response = JSON.stringify(message);
