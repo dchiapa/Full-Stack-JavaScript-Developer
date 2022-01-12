@@ -77,7 +77,16 @@ const responses = {
   },
   mascotas: {
     get: (data, callback) => {
-      callback(200, resources.pets);
+      if (data.index) {
+        if (resources.pets[data.index]) {
+          return callback(200, resources.pets[data.index]);
+        }
+        return callback(404, {
+          message: `No existe una mascota con el indice ${data.index}`,
+        });
+      } else {
+        callback(200, resources.pets);
+      }
     },
     post: (data, callback) => {
       callback(200, resources.pets);
