@@ -13,7 +13,7 @@ const serverRequestListener = (req, res) => {
   const originalURL = req.url;
   const parsedURL = url.parse(originalURL, true);
   // 1.1 get route
-  const route = parsedURL.pathname;
+  const route = parsedURL.pathname.slice(1);
   // 1.2 get method
   const method = req.method.toLowerCase();
   // 1.3 get query
@@ -47,8 +47,8 @@ const serverRequestListener = (req, res) => {
     console.log(data);
     // 3 handle the route
     let handler;
-    if (route && responses[route][method]) {
-      handler = responses[route][method];
+    if (data.route && responses[data.route][method]) {
+      handler = responses[data.route][method];
     } else {
       handler = responses.notFound;
     }
@@ -66,10 +66,10 @@ const serverRequestListener = (req, res) => {
 };
 
 const responses = {
-  "/": (data, callback) => {
+  "": (data, callback) => {
     callback(200, { message: "Estas en /" });
   },
-  "/mascotas": {
+  mascotas: {
     get: (data, callback) => {
       callback(200, resources.pets);
     },
