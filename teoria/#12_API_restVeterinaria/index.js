@@ -32,10 +32,11 @@ const serverRequestListener = (req, res) => {
   // 1.5.3 on end event
   req.on("end", () => {
     buffer += decoder.end();
+    // 2.1 parse buffer about content type
     if (headers["content-type"] === "application/json") {
       buffer = JSON.parse(buffer);
     }
-    // 2 organize data
+    // 2.2 organize data
     const data = {
       route,
       method,
