@@ -1,4 +1,4 @@
-const resources = require(".resources");
+const resources = require("./resources");
 
 module.exports = {
   "": (data, callback) => {
