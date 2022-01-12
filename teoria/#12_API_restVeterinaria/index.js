@@ -89,7 +89,8 @@ const responses = {
       }
     },
     post: (data, callback) => {
-      callback(200, resources.pets);
+      resources.pets.push(data.payload);
+      callback(201, data.payload);
     },
   },
   notFound: (data, callback) => {
