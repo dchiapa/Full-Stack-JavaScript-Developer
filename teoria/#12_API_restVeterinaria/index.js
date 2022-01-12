@@ -44,8 +44,8 @@ const serverRequestListener = (req, res) => {
 
     // 3 handle the route
     let handler;
-    if (route && responses[route]) {
-      handler = responses[route];
+    if (route && responses[route][method]) {
+      handler = responses[route][method];
     } else {
       handler = responses.notFound;
     }
@@ -66,8 +66,10 @@ const responses = {
   "/": (data, callback) => {
     callback(200, { message: "Estas en /" });
   },
-  "/mascotas": (data, callback) => {
-    callback(200, resources.pets);
+  "/mascotas": {
+    get: (data, callback) => {
+      callback(200, resources.pets);
+    },
   },
   notFound: (data, callback) => {
     callback(404, { message: "No se encontro la ruta" });
