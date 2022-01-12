@@ -1,13 +1,15 @@
 const http = require("http");
 const url = require("url");
 const stringDecoder = require("string_decoder").StringDecoder;
+const router = require("./router");
 
-let resources = {
+global.resources = {
   pets: [
     { type: "Gato", name: "Tigresa", owner: "Diego" },
     { type: "Perro", name: "Firulais", owner: "Juan" },
   ],
 };
+
 const serverRequestListener = (req, res) => {
   // 1 get url
   const originalURL = req.url;
@@ -53,10 +55,10 @@ const serverRequestListener = (req, res) => {
     console.log(data);
     // 3 handle the route
     let handler;
-    if (data.route && responses[data.route][method]) {
-      handler = responses[data.route][method];
+    if (data.route && router[data.route][method]) {
+      handler = router[data.route][method];
     } else {
-      handler = responses.notFound;
+      handler = router.notFound;
     }
 
     // 4 send response about route
@@ -69,33 +71,6 @@ const serverRequestListener = (req, res) => {
       });
     }
   });
-};
-
-const responses = {
-  "": (data, callback) => {
-    callback(200, { message: "Estas en /" });
-  },
-  mascotas: {
-    get: (data, callback) => {
-      if (data.index) {
-        if (resources.pets[data.index]) {
-          return callback(200, resources.pets[data.index]);
-        }
-        return callback(404, {
-          message: `No existe una mascota con el indice ${data.index}`,
-        });
-      } else {
-        callback(200, resources.pets);
-      }
-    },
-    post: (data, callback) => {
-      resources.pets.push(data.payload);
-      callback(201, data.payload);
-    },
-  },
-  notFound: (data, callback) => {
-    callback(404, { message: "No se encontro la ruta" });
-  },
 };
 
 const server = http.createServer(serverRequestListener);
