@@ -41,7 +41,7 @@ const serverRequestListener = (req, res) => {
       headers,
       payload: buffer,
     };
-
+    console.log(data);
     // 3 handle the route
     let handler;
     if (route && responses[route][method]) {
@@ -68,6 +68,9 @@ const responses = {
   },
   "/mascotas": {
     get: (data, callback) => {
+      callback(200, resources.pets);
+    },
+    post: (data, callback) => {
       callback(200, resources.pets);
     },
   },
