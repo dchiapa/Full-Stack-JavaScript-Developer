@@ -32,7 +32,7 @@ module.exports = (req, res) => {
     //* ordered data
     const data = {
       route: routeClean ? routeClean : route,
-      index,
+      index: index && index !== "" ? index : null,
       method,
       query,
       headers,
