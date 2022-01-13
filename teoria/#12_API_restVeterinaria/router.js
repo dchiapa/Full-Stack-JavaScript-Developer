@@ -17,6 +17,19 @@ module.exports = {
         callback(200, resources.pets);
       }
     },
+    put: (data, callback) => {
+      if (typeof data.index !== "undefined") {
+        if (resources.pets[data.index]) {
+          resources.pets[data.index] = data.payload;
+          return callback(200, resources.pets[data.index]);
+        }
+        return callback(404, {
+          message: `No existe una mascota con el indice ${data.index}`,
+        });
+      } else {
+        return callback(400, { message: `No envió ningún indice` });
+      }
+    },
     post: (data, callback) => {
       resources.pets.push(data.payload);
       callback(201, data.payload);
