@@ -18,7 +18,7 @@ module.exports = {
       }
     },
     put: (data, callback) => {
-      if (typeof data.index !== "undefined") {
+      if (data.index !== null) {
         if (resources.pets[data.index]) {
           resources.pets[data.index] = data.payload;
           return callback(200, resources.pets[data.index]);
