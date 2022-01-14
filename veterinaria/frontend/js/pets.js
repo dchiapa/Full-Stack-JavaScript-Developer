@@ -58,19 +58,32 @@ const openEditPet = (index) => {
     formPetOwner.value = pets[index].owner;
   };
 };
-const submitData = () => {
-  const petData = {
-    type: formPetType.value,
-    name: formPetName.value,
-    owner: formPetOwner.value,
-  };
-  if (formPetIndex.value !== "") {
-    pets[formPetIndex.value] = petData;
-  } else {
-    pets.push(petData);
+const submitData = async () => {
+  try {
+    const petData = {
+      type: formPetType.value,
+      name: formPetName.value,
+      owner: formPetOwner.value,
+    };
+    let method = "POST";
+    let apiUrlSend = apiUrl;
+    if (formPetIndex.value !== "") {
+      pets[formPetIndex.value] = petData;
+      method = "PUT";
+      apiUrlSend = `${apiUrl}/${formPetIndex.value}`;
+    }
+    const response = await fetch(apiUrlSend, {
+      method,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(petData),
+    });
+    if (response.ok) {
+      closePet();
+      renderPets();
+    }
+  } catch (error) {
+    throw error;
   }
-  closePet();
-  renderPets();
 };
 const deletePet = (index) => {
   return () => {
