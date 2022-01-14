@@ -12,7 +12,19 @@ let pets = [
   { type: "Perro", name: "Firulais", owner: "Juan" },
 ];
 
+const getPets = () => {
+  fetch("http://127.0.0.1:5000/pets")
+    .then((response) => {
+      if (response.ok) {
+        response.json();
+      }
+    })
+    .then((mascotas) => {
+      console.log({ mascotas });
+    });
+};
 const renderPets = () => {
+  getPets();
   const htmlPets = pets
     .map(
       (pet, index) => `
