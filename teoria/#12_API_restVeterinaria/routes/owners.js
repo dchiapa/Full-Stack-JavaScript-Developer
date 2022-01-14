@@ -13,7 +13,10 @@ module.exports = (owners) => {
           message: `No existe un dueño con el indice ${data.index}`,
         });
       } else {
-        callback(200, owners);
+        if (owners.length > 0) {
+          return callback(200, owners);
+        }
+        return callback(404, { message: "No hay dueños registrados" });
       }
     },
     put: (data, callback) => {

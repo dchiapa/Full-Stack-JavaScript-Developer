@@ -13,7 +13,10 @@ module.exports = (veterinaries) => {
           message: `No existe un veterinario con el indice ${data.index}`,
         });
       } else {
-        callback(200, veterinaries);
+        if (veterinaries.length > 0) {
+          return callback(200, veterinaries);
+        }
+        return callback(404, { message: "No hay veterinarios registrados" });
       }
     },
     put: (data, callback) => {

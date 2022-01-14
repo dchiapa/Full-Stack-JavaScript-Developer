@@ -13,7 +13,10 @@ module.exports = (pets) => {
           message: `No existe una mascota con el indice ${data.index}`,
         });
       } else {
-        callback(200, pets);
+        if (pets.length > 0) {
+          return callback(200, pets);
+        }
+        return callback(404, { message: "No hay mascotas registradas" });
       }
     },
     put: (data, callback) => {
