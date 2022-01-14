@@ -8,10 +8,10 @@ module.exports = {
   "": (data, callback) => {
     callback(200, { message: "Estas en /" });
   },
-  consultas: queriesRoute(queries),
-  duenos: ownersRouter(owners),
-  mascotas: petsRoute(pets),
-  veterinarios: veterinariesRoute(veterinaries),
+  queries: queriesRoute(queries),
+  owners: ownersRouter(owners),
+  pets: petsRoute(pets),
+  verinaries: veterinariesRoute(veterinaries),
   notFound: (data, callback) => {
     callback(404, { message: "No se encontro la ruta" });
   },
