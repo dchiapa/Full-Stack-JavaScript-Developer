@@ -6,22 +6,17 @@ const formPetName = document.getElementById("petName");
 const formPetOwner = document.getElementById("petOwner");
 const btnClosePet = document.getElementById("btnClosePet");
 const btnSavePet = document.getElementById("btnSavePet");
+const apiUrl = "http://127.0.0.1:5000/pets";
 
 let pets = [
   { type: "Gato", name: "Tigresa", owner: "Diego" },
   { type: "Perro", name: "Firulais", owner: "Juan" },
 ];
 
-const getPets = () => {
-  fetch("http://127.0.0.1:5000/pets")
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-    })
-    .then((serverPets) => {
-      pets = serverPets;
-    });
+const getPets = async () => {
+  const response = await fetch(apiUrl);
+  const serverPets = await response.json();
+  Array.isArray(serverPets) && (pets = serverPets);
 };
 const renderPets = () => {
   getPets();
