@@ -19,8 +19,8 @@ const getPets = () => {
         return response.json();
       }
     })
-    .then((mascotas) => {
-      console.log(mascotas);
+    .then((serverPets) => {
+      pets = serverPets;
     });
 };
 const renderPets = () => {
