@@ -16,11 +16,11 @@ const getPets = () => {
   fetch("http://127.0.0.1:5000/pets")
     .then((response) => {
       if (response.ok) {
-        response.json();
+        return response.json();
       }
     })
     .then((mascotas) => {
-      console.log({ mascotas });
+      console.log(mascotas);
     });
 };
 const renderPets = () => {
