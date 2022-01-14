@@ -1,4 +1,8 @@
 module.exports = {
+  owners: [
+    { firstName: "Diego", lastName: "Perez", documento: "64568636" },
+    { firstName: "Jimena", lastName: "Bolilla", documento: "76556756" },
+  ],
   pets: [
     { type: "Gato", name: "Tigresa", owner: "Diego" },
     { type: "Perro", name: "Firulais", owner: "Juan" },

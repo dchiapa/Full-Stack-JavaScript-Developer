@@ -1,4 +1,5 @@
-const { pets, veterinaries } = require("./resources");
+const { owners, pets, veterinaries } = require("./resources");
+const ownersRouter = require("./routes/owners");
 const petsRoute = require("./routes/pets");
 const veterinariesRoute = require("./routes/veterinaries");
 
@@ -8,6 +9,7 @@ module.exports = {
   },
   mascotas: petsRoute(pets),
   veterinarios: veterinariesRoute(veterinaries),
+  duenos: ownersRouter(owners),
   notFound: (data, callback) => {
     callback(404, { message: "No se encontro la ruta" });
   },
