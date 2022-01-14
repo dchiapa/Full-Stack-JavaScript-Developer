@@ -8,21 +8,18 @@ const btnClosePet = document.getElementById("btnClosePet");
 const btnSavePet = document.getElementById("btnSavePet");
 const apiUrl = "http://127.0.0.1:5000/pets";
 
-let pets = [
-  { type: "Gato", name: "Tigresa", owner: "Diego" },
-  { type: "Perro", name: "Firulais", owner: "Juan" },
-];
+let pets = [];
 
-const getPets = async () => {
-  const response = await fetch(apiUrl);
-  const serverPets = await response.json();
-  Array.isArray(serverPets) && (pets = serverPets);
-};
-const renderPets = () => {
-  getPets();
-  const htmlPets = pets
-    .map(
-      (pet, index) => `
+const renderPets = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const serverPets = await response.json();
+    if (Array.isArray(serverPets)) {
+      pets = serverPets;
+    }
+    const htmlPets = pets
+      .map(
+        (pet, index) => `
     <tr>
       <th scope="row">${index}</th>
       <td>${pet.type}</td>
@@ -40,15 +37,18 @@ const renderPets = () => {
         </div>
       </td>
     </tr>`
-    )
-    .join("");
-  petList.innerHTML = htmlPets;
-  Array.from(document.getElementsByClassName("btnEditPet")).forEach(
-    (btn, index) => btn.addEventListener("click", openEditPet(index))
-  );
-  Array.from(document.getElementsByClassName("btnDeletePet")).forEach(
-    (btn, index) => btn.addEventListener("click", deletePet(index))
-  );
+      )
+      .join("");
+    petList.innerHTML = htmlPets;
+    Array.from(document.getElementsByClassName("btnEditPet")).forEach(
+      (btn, index) => btn.addEventListener("click", openEditPet(index))
+    );
+    Array.from(document.getElementsByClassName("btnDeletePet")).forEach(
+      (btn, index) => btn.addEventListener("click", deletePet(index))
+    );
+  } catch (error) {
+    throw error;
+  }
 };
 const openEditPet = (index) => {
   return () => {
