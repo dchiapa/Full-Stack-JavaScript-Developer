@@ -4,18 +4,18 @@ Las primeras secciones del curso no se han subido, dado que es contenido que ya 
 
 ## Secciones del curso:
 
-- #1: Introducción.
-- #2: HTML desde cero.
-- #3: CSS para formularios.
-- #4: JS básico.
-- #5: JS intermedio.
-- #6: JS asíncrono.
-- #7: AJAX.
-- #8: FETCH API.
-- #9: App veterinaria parte 1.
-- #10: Introducción a NODE.
-- #11: Primeros pasos con NODEJS.
-- #12: App veterinaria parte 2: API rest, NODE puro.
+- [x] #1: Introducción.
+- [x] #2: HTML desde cero.
+- [x] #3: CSS para formularios.
+- [x] #4: JS básico.
+- [x] #5: JS intermedio.
+- [x] #6: JS asíncrono.
+- [x] #7: AJAX.
+- [x] #8: FETCH API.
+- [x] #9: App veterinaria parte 1.
+- [x] #10: Introducción a NODE.
+- [x] #11: Primeros pasos con NODEJS.
+- [x] #12: App veterinaria parte 2: API rest, NODE puro.
 
 ## Proyecto veterinaria
 
