@@ -11,7 +11,7 @@ module.exports = {
   queries: queriesRoute(queries),
   owners: ownersRouter(owners),
   pets: petsRoute(pets),
-  verinaries: veterinariesRoute(veterinaries),
+  veterinaries: veterinariesRoute(veterinaries),
   notFound: (data, callback) => {
     callback(404, { message: "No se encontro la ruta" });
   },
