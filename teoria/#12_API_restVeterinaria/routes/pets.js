@@ -1,8 +1,9 @@
 module.exports = (pets) => {
   return {
     post: (data, callback) => {
-      pets.push(data.payload);
-      callback(201, data.payload);
+      let newPet = data.payload;
+      pets = [...pets, newPet];
+      callback(201, newPet);
     },
     get: (data, callback) => {
       if (data.index) {

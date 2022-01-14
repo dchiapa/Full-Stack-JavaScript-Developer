@@ -1,8 +1,9 @@
 module.exports = (veterinaries) => {
   return {
     post: (data, callback) => {
-      veterinaries.push(data.payload);
-      callback(201, data.payload);
+      let newVeterinary = data.payload;
+      veterinaries = [...veterinaries, newVeterinary];
+      callback(201, newVeterinary);
     },
     get: (data, callback) => {
       if (data.index) {

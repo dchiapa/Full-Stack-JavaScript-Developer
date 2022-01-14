@@ -1,10 +1,10 @@
 module.exports = (queries) => {
   return {
     post: (data, callback) => {
-      let query = data.payload;
-      query.addedDate = new Date();
-      query.edtiDate = null;
-      queries.push(query);
+      let newQuery = data.payload;
+      newQuery.addedDate = new Date();
+      newQuery.edtiDate = null;
+      queries = [...queries, newQuery];
       callback(201, data.payload);
     },
     get: (data, callback) => {

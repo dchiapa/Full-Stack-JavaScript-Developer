@@ -1,8 +1,9 @@
 module.exports = (owners) => {
   return {
     post: (data, callback) => {
-      owners.push(data.payload);
-      callback(201, data.payload);
+      let newOwner = data.payload;
+      owners = [...owners, newOwner];
+      callback(201, newOwner);
     },
     get: (data, callback) => {
       if (data.index) {
