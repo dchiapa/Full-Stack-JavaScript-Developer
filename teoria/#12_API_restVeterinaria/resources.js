@@ -10,8 +10,8 @@ module.exports = {
   queries: [
     {
       pet: 0,
-      date: new Date(),
-      titulo: "Chequeo y vacunación",
+      addedDate: new Date(),
+      editDate: null,
       description:
         "Se chequeo el estado general, y se aplicaron las vacunas correspondientes",
       diagnosis: "El animal esta en buen estado",

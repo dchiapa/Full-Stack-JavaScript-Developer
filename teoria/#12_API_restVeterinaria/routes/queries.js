@@ -1,7 +1,10 @@
 module.exports = (queries) => {
   return {
     post: (data, callback) => {
-      queries.push(data.payload);
+      let query = data.payload;
+      query.addedDate = new Date();
+      query.edtiDate = null;
+      queries.push(query);
       callback(201, data.payload);
     },
     get: (data, callback) => {
@@ -22,7 +25,9 @@ module.exports = (queries) => {
     put: (data, callback) => {
       if (data.index !== null) {
         if (queries[data.index]) {
-          queries[data.index] = data.payload;
+          let query = data.payload;
+          query.editDate = new Date();
+          queries[data.index] = query;
           return callback(200, queries[data.index]);
         }
         return callback(404, {
