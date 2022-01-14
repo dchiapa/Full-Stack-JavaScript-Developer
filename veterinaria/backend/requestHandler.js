@@ -8,6 +8,17 @@ module.exports = (req, res) => {
   const parsedURL = url.parse(originalURL, true);
   const route = parsedURL.pathname.slice(1);
   const method = req.method.toLowerCase();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "options, get, post, put, delete"
+  );
+  if (method === "options") {
+    res.writeHead(200);
+    res.end();
+    return;
+  }
   const { query = {} } = parsedURL;
   const { headers = {} } = req;
   const decoder = new stringDecoder("utf-8");
