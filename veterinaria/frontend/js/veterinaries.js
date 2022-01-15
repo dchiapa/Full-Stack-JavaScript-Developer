@@ -1,21 +1,20 @@
 const veterinariesList = document.getElementById("veterinariesList");
 const formVeterinary = document.getElementById("formVeterinary");
 const formVeterinaryIndex = document.getElementById("veterinaryIndex");
-const formVeterinaryIdentification = document.getElementById(
-  "veterinaryIdentification"
-);
+const formVeterinaryDocument = document.getElementById("veterinaryDocument");
 const formVeterinaryFirstName = document.getElementById("veterinaryFirstName");
 const formVeterinaryLastName = document.getElementById("veterinaryLastName");
-const formVeterinaryCountry = document.getElementById("veterinaryCountry");
 const btnCloseVeterinary = document.getElementById("btnCloseVeterinary");
 const btnSaveVeterinary = document.getElementById("btnSaveVeterinary");
 const alertContainer = document.getElementById("alertContainer");
 const apiUrl = "http://127.0.0.1:5000/veterinaries";
 
+let veterinaries = [];
+
 const renderVeterinaries = async () => {
   try {
     const response = await fetch(apiUrl);
-    const veterinaries = await response.json();
+    veterinaries = await response.json();
     if (Array.isArray(veterinaries)) {
       const htmlVeterinaries = veterinaries
         .map(
@@ -61,26 +60,37 @@ const renderVeterinaries = async () => {
 const openEditVeterinary = (index) => {
   return () => {
     formVeterinaryIndex.value = index;
-    formVeterinaryIdentification.value = veterinaries[index].identification;
+    formVeterinaryDocument.value = veterinaries[index].document;
     formVeterinaryFirstName.value = veterinaries[index].firstName;
     formVeterinaryLastName.value = veterinaries[index].lastName;
-    formVeterinaryCountry.value = veterinaries[index].country;
   };
 };
-const submitData = () => {
-  const veterinaryData = {
-    identification: formVeterinaryIdentification.value,
-    firstName: formVeterinaryFirstName.value,
-    lastName: formVeterinaryLastName.value,
-    country: formVeterinaryCountry.value,
-  };
-  if (formVeterinaryIndex.value !== "") {
-    veterinaries[formVeterinaryIndex.value] = veterinaryData;
-  } else {
-    veterinaries.push(veterinaryData);
+const submitData = async () => {
+  try {
+    const veterinaryData = {
+      document: formVeterinaryDocument.value,
+      firstName: formVeterinaryFirstName.value,
+      lastName: formVeterinaryLastName.value,
+    };
+    let method = "POST";
+    let apiUrlSend = apiUrl;
+    if (formVeterinaryIndex.value !== "") {
+      veterinaries[formVeterinaryIndex.value] = veterinaryData;
+      method = "PUT";
+      apiUrlSend = `${apiUrl}/${formVeterinaryIndex.value}`;
+    }
+    const response = await fetch(apiUrlSend, {
+      method,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(veterinaryData),
+    });
+    if (response.ok) {
+      closeVeterinary();
+      renderVeterinaries();
+    }
+  } catch (error) {
+    console.error({ error });
   }
-  closeVeterinary();
-  renderVeterinaries();
 };
 const deleteVeterinary = (index) => {
   return () => {
