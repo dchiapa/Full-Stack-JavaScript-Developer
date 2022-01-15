@@ -78,7 +78,7 @@ const submitData = async () => {
       body: JSON.stringify(petData),
     });
     if (response.ok) {
-      closePet();
+      clearPetModal();
       renderPets();
     }
   } catch (error) {
@@ -91,7 +91,7 @@ const deletePet = (index) => {
     renderPets();
   };
 };
-const closePet = () => {
+const clearPetModal = () => {
   formPetIndex.value = "";
   formPet.reset();
 };
