@@ -93,9 +93,18 @@ const submitData = async () => {
   }
 };
 const deleteVeterinary = (index) => {
-  return () => {
-    veterinaries.splice(index, 1);
-    renderVeterinaries();
+  const apiUrlDelete = `${apiUrl}/${index}`;
+  return async () => {
+    try {
+      const response = await fetch(apiUrlDelete, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        renderVeterinaries();
+      }
+    } catch (error) {
+      console.log({ error });
+    }
   };
 };
 const closeVeterinary = () => {
