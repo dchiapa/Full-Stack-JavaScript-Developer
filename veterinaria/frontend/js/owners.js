@@ -21,7 +21,7 @@ const renderOwners = async () => {
           (owner, index) => `
         <tr>
           <th scope="row">${index}</th>
-          <td>${owner.Document}</td>
+          <td>${owner.document}</td>
           <td>${owner.firstName}</td>
           <td>${owner.lastName}</td>
           <td>
