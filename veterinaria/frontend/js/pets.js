@@ -16,36 +16,41 @@ const renderPets = async () => {
     const serverPets = await response.json();
     if (Array.isArray(serverPets)) {
       pets = serverPets;
+      const htmlPets = pets
+        .map(
+          (pet, index) => `
+      <tr>
+        <th scope="row">${index}</th>
+        <td>${pet.type}</td>
+        <td>${pet.name}</td>
+        <td>${pet.owner}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-info btnEditPet" data-index=${index} data-toggle="modal"
+            data-target="#modalPet">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="btn btn-danger btnDeletePet">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>`
+        )
+        .join("");
+      petList.innerHTML = htmlPets;
+      Array.from(document.getElementsByClassName("btnEditPet")).forEach(
+        (btn, index) => btn.addEventListener("click", openEditPet(index))
+      );
+      Array.from(document.getElementsByClassName("btnDeletePet")).forEach(
+        (btn, index) => btn.addEventListener("click", deletePet(index))
+      );
+      return;
     }
-    const htmlPets = pets
-      .map(
-        (pet, index) => `
-    <tr>
-      <th scope="row">${index}</th>
-      <td>${pet.type}</td>
-      <td>${pet.name}</td>
-      <td>${pet.owner}</td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-info btnEditPet" data-index=${index} data-toggle="modal"
-          data-target="#modalPet">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button type="button" class="btn btn-danger btnDeletePet">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>`
-      )
-      .join("");
-    petList.innerHTML = htmlPets;
-    Array.from(document.getElementsByClassName("btnEditPet")).forEach(
-      (btn, index) => btn.addEventListener("click", openEditPet(index))
-    );
-    Array.from(document.getElementsByClassName("btnDeletePet")).forEach(
-      (btn, index) => btn.addEventListener("click", deletePet(index))
-    );
+    petList.innerHTML = `
+      <tr>
+        <td colspan="5"" align="center">No hay mascotas registradas</td>
+      </tr>`;
   } catch (error) {
     throw error;
   }
