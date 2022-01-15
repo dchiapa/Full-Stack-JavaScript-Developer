@@ -1,72 +1,66 @@
 const ownersList = document.getElementById("ownersList");
 const formOwner = document.getElementById("formOwner");
 const formOwnerIndex = document.getElementById("ownerIndex");
-const formOwnerIdentification = document.getElementById("ownerIdentification");
+const formOwnerDocument = document.getElementById("ownerDocument");
 const formOwnerFirstName = document.getElementById("ownerFirstName");
 const formOwnerLastName = document.getElementById("ownerLastName");
-const formOwnerCountry = document.getElementById("ownerCountry");
 const btnCloseOwner = document.getElementById("btnCloseOwner");
 const btnSaveOwner = document.getElementById("btnSaveOwner");
+const apiUrl = "http://127.0.0.1:5000/owners";
 
-let owners = [
-  {
-    identification: "123456789",
-    firstName: "Diego",
-    lastName: "Chiapa",
-    country: "Argentina",
-  },
-  {
-    identification: "345678912",
-    firstName: "Juan",
-    lastName: "Castillejo",
-    country: "Uruguay",
-  },
-];
+let owners = [];
 
-const renderOwners = () => {
-  const htmlOwners = owners
-    .map(
-      (owner, index) => `
+const renderOwners = async () => {
+  const response = await fetch(apiUrl);
+  owners = await response.json();
+  if (Array.isArray(owners)) {
+    const htmlOwners = owners
+      .map(
+        (owner, index) => `
+        <tr>
+          <th scope="row">${index}</th>
+          <td>${owner.Document}</td>
+          <td>${owner.firstName}</td>
+          <td>${owner.lastName}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-info btnEditOwner" data-index=${index} data-toggle="modal"
+              data-target="#modalOwner">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button type="button" class="btn btn-danger btnDeleteOwner">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>`
+      )
+      .join("");
+    ownersList.innerHTML = htmlOwners;
+    Array.from(document.getElementsByClassName("btnEditOwner")).forEach(
+      (btn, index) => btn.addEventListener("click", openEditOwner(index))
+    );
+    Array.from(document.getElementsByClassName("btnDeleteOwner")).forEach(
+      (btn, index) => btn.addEventListener("click", deleteOwner(index))
+    );
+    return;
+  }
+  ownersList.innerHTML = `
     <tr>
-      <th scope="row">${index}</th>
-      <td>${owner.identification}</td>
-      <td>${owner.firstName}</td>
-      <td>${owner.lastName}</td>
-      <td>${owner.country}</td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-info btnEditOwner" data-index=${index} data-toggle="modal"
-          data-target="#modalOwner">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button type="button" class="btn btn-danger btnDeleteOwner">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>`
-    )
-    .join("");
-  ownersList.innerHTML = htmlOwners;
-  Array.from(document.getElementsByClassName("btnEditOwner")).forEach(
-    (btn, index) => btn.addEventListener("click", openEditOwner(index))
-  );
-  Array.from(document.getElementsByClassName("btnDeleteOwner")).forEach(
-    (btn, index) => btn.addEventListener("click", deleteOwner(index))
-  );
+      <td colspan="5"" align="center">No hay dueños registradas</td>
+    </tr>`;
 };
 const openEditOwner = (index) => {
   return () => {
     formOwnerIndex.value = index;
-    formOwnerIdentification.value = owners[index].identification;
+    formOwnerDocument.value = owners[index].document;
     formOwnerFirstName.value = owners[index].firstName;
     formOwnerLastName.value = owners[index].lastName;
-    formOwnerCountry.value = owners[index].country;
   };
 };
 const submitData = () => {
   const ownerData = {
-    identification: formOwnerIdentification.value,
+    document: formOwnerDocument.value,
     firstName: formOwnerFirstName.value,
     lastName: formOwnerLastName.value,
     country: formOwnerCountry.value,
