@@ -77,7 +77,7 @@ const submitData = async () => {
     body: JSON.stringify(ownerData),
   });
   if (response.ok) {
-    closeOwner();
+    clearOwnerModal();
     renderOwners();
   }
 };
@@ -90,12 +90,12 @@ const deleteOwner = (index) => {
     }
   };
 };
-const closeOwner = () => {
+const clearOwnerModal = () => {
   formOwnerIndex.value = "";
   formOwner.reset();
 };
 
 formOwner.addEventListener("submit", (e) => e.preventDefault());
 btnSaveOwner.addEventListener("click", () => submitData());
-btnCloseOwner.addEventListener("click", () => closeOwner());
+btnCloseOwner.addEventListener("click", () => clearOwnerModal());
 renderOwners();
