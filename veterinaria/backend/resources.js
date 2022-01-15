@@ -1,7 +1,7 @@
 module.exports = {
   owners: [
-    { firstName: "Diego", lastName: "Perez", documento: "64568636" },
-    { firstName: "Jimena", lastName: "Bolilla", documento: "76556756" },
+    { firstName: "Diego", lastName: "Perez", document: "64568636" },
+    { firstName: "Jimena", lastName: "Bolilla", document: "76556756" },
   ],
   pets: [
     { type: "Gato", name: "Tigresa", owner: "Diego" },
@@ -19,7 +19,7 @@ module.exports = {
     },
   ],
   veterinaries: [
-    { firstName: "Juan", lastName: "Perez", documento: "12345678" },
-    { firstName: "Claudia", lastName: "Fernandez", documento: "87654321" },
+    { firstName: "Juan", lastName: "Perez", document: "12345678" },
+    { firstName: "Claudia", lastName: "Fernandez", document: "87654321" },
   ],
 };
