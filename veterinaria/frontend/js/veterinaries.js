@@ -9,32 +9,22 @@ const formVeterinaryLastName = document.getElementById("veterinaryLastName");
 const formVeterinaryCountry = document.getElementById("veterinaryCountry");
 const btnCloseVeterinary = document.getElementById("btnCloseVeterinary");
 const btnSaveVeterinary = document.getElementById("btnSaveVeterinary");
+const alertContainer = document.getElementById("alertContainer");
+const apiUrl = "http://127.0.0.1:5000/veterinaries";
 
-let veterinaries = [
-  {
-    identification: "123456789",
-    firstName: "Diego",
-    lastName: "Chiapa",
-    country: "Argentina",
-  },
-  {
-    identification: "345678912",
-    firstName: "Juan",
-    lastName: "Castillejo",
-    country: "Uruguay",
-  },
-];
-
-const renderVeterinaries = () => {
-  const htmlVeterinaries = veterinaries
-    .map(
-      (veterinary, index) => `
+const renderVeterinaries = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const veterinaries = await response.json();
+    if (Array.isArray(veterinaries)) {
+      const htmlVeterinaries = veterinaries
+        .map(
+          (veterinary, index) => `
     <tr>
       <th scope="row">${index}</th>
-      <td>${veterinary.identification}</td>
+      <td>${veterinary.document}</td>
       <td>${veterinary.firstName}</td>
       <td>${veterinary.lastName}</td>
-      <td>${veterinary.country}</td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-info btnEditVeterinary" data-index=${index} data-toggle="modal"
@@ -47,15 +37,26 @@ const renderVeterinaries = () => {
         </div>
       </td>
     </tr>`
-    )
-    .join("");
-  veterinariesList.innerHTML = htmlVeterinaries;
-  Array.from(document.getElementsByClassName("btnEditVeterinary")).forEach(
-    (btn, index) => btn.addEventListener("click", openEditVeterinary(index))
-  );
-  Array.from(document.getElementsByClassName("btnDeleteVeterinary")).forEach(
-    (btn, index) => btn.addEventListener("click", deleteVeterinary(index))
-  );
+        )
+        .join("");
+      veterinariesList.innerHTML = htmlVeterinaries;
+      Array.from(document.getElementsByClassName("btnEditVeterinary")).forEach(
+        (btn, index) => btn.addEventListener("click", openEditVeterinary(index))
+      );
+      Array.from(
+        document.getElementsByClassName("btnDeleteVeterinary")
+      ).forEach((btn, index) =>
+        btn.addEventListener("click", deleteVeterinary(index))
+      );
+      return;
+    }
+    veterinariesList.innerHTML = `
+      <tr>
+        <td colspan="5"" align="center">No hay veterinarios registradas</td>
+      </tr>`;
+  } catch (error) {
+    console.error({ error });
+  }
 };
 const openEditVeterinary = (index) => {
   return () => {
