@@ -6,17 +6,19 @@ const formOwnerFirstName = document.getElementById("ownerFirstName");
 const formOwnerLastName = document.getElementById("ownerLastName");
 const btnCloseOwner = document.getElementById("btnCloseOwner");
 const btnSaveOwner = document.getElementById("btnSaveOwner");
+const alertContainer = document.getElementById("alertContainer");
 const apiUrl = "http://127.0.0.1:5000/owners";
 
 let owners = [];
 
 const renderOwners = async () => {
-  const response = await fetch(apiUrl);
-  owners = await response.json();
-  if (Array.isArray(owners)) {
-    const htmlOwners = owners
-      .map(
-        (owner, index) => `
+  try {
+    const response = await fetch(apiUrl);
+    owners = await response.json();
+    if (Array.isArray(owners)) {
+      const htmlOwners = owners
+        .map(
+          (owner, index) => `
         <tr>
           <th scope="row">${index}</th>
           <td>${owner.Document}</td>
@@ -34,21 +36,25 @@ const renderOwners = async () => {
             </div>
           </td>
         </tr>`
-      )
-      .join("");
-    ownersList.innerHTML = htmlOwners;
-    Array.from(document.getElementsByClassName("btnEditOwner")).forEach(
-      (btn, index) => btn.addEventListener("click", openEditOwner(index))
-    );
-    Array.from(document.getElementsByClassName("btnDeleteOwner")).forEach(
-      (btn, index) => btn.addEventListener("click", deleteOwner(index))
-    );
-    return;
-  }
-  ownersList.innerHTML = `
+        )
+        .join("");
+      ownersList.innerHTML = htmlOwners;
+      Array.from(document.getElementsByClassName("btnEditOwner")).forEach(
+        (btn, index) => btn.addEventListener("click", openEditOwner(index))
+      );
+      Array.from(document.getElementsByClassName("btnDeleteOwner")).forEach(
+        (btn, index) => btn.addEventListener("click", deleteOwner(index))
+      );
+      return;
+    }
+    ownersList.innerHTML = `
     <tr>
       <td colspan="5"" align="center">No hay dueños registradas</td>
     </tr>`;
+  } catch (error) {
+    console.error({ error });
+    alertContainer.classList.add("show");
+  }
 };
 const openEditOwner = (index) => {
   return () => {
@@ -59,34 +65,44 @@ const openEditOwner = (index) => {
   };
 };
 const submitData = async () => {
-  const ownerData = {
-    document: formOwnerDocument.value,
-    firstName: formOwnerFirstName.value,
-    lastName: formOwnerLastName.value,
-  };
-  let method = "POST";
-  let apiUrlSend = apiUrl;
-  if (formOwnerIndex.value !== "") {
-    owners[formOwnerIndex.value] = ownerData;
-    method = "PUT";
-    apiUrlSend = `${apiUrl}/${formOwnerIndex.value}`;
-  }
-  const response = await fetch(apiUrlSend, {
-    method,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(ownerData),
-  });
-  if (response.ok) {
-    clearOwnerModal();
-    renderOwners();
+  try {
+    const ownerData = {
+      document: formOwnerDocument.value,
+      firstName: formOwnerFirstName.value,
+      lastName: formOwnerLastName.value,
+    };
+    let method = "POST";
+    let apiUrlSend = apiUrl;
+    if (formOwnerIndex.value !== "") {
+      owners[formOwnerIndex.value] = ownerData;
+      method = "PUT";
+      apiUrlSend = `${apiUrl}/${formOwnerIndex.value}`;
+    }
+    const response = await fetch(apiUrlSend, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(ownerData),
+    });
+    if (response.ok) {
+      clearOwnerModal();
+      renderOwners();
+    }
+  } catch (error) {
+    console.error({ error });
+    alertContainer.classList.add("show");
   }
 };
 const deleteOwner = (index) => {
   const apiUrlDelete = `${apiUrl}/${index}`;
   return async () => {
-    const response = await fetch(apiUrlDelete, { method: "DELETE" });
-    if (response.ok) {
-      renderOwners();
+    try {
+      const response = await fetch(apiUrlDelete, { method: "DELETE" });
+      if (response.ok) {
+        renderOwners();
+      }
+    } catch (error) {
+      console.error({ error });
+      alertContainer.classList.add("show");
     }
   };
 };
