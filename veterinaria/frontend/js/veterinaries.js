@@ -55,6 +55,7 @@ const renderVeterinaries = async () => {
       </tr>`;
   } catch (error) {
     console.error({ error });
+    alertContainer.classList.add("show");
   }
 };
 const openEditVeterinary = (index) => {
@@ -90,6 +91,7 @@ const submitData = async () => {
     }
   } catch (error) {
     console.error({ error });
+    alertContainer.classList.add("show");
   }
 };
 const deleteVeterinary = (index) => {
@@ -104,6 +106,7 @@ const deleteVeterinary = (index) => {
       }
     } catch (error) {
       console.log({ error });
+      alertContainer.classList.add("show");
     }
   };
 };
