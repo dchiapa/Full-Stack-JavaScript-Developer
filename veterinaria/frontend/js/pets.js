@@ -86,9 +86,19 @@ const submitData = async () => {
   }
 };
 const deletePet = (index) => {
-  return () => {
-    pets.splice(index, 1);
-    renderPets();
+  const apiUrlDelete = `${apiUrl}/${index}`;
+  return async () => {
+    try {
+      const response = await fetch(apiUrlDelete, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        clearPetModal();
+        renderPets();
+      }
+    } catch (error) {
+      throw error;
+    }
   };
 };
 const clearPetModal = () => {
