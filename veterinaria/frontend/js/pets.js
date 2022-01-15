@@ -6,6 +6,7 @@ const formPetName = document.getElementById("petName");
 const formPetOwner = document.getElementById("petOwner");
 const btnClosePet = document.getElementById("btnClosePet");
 const btnSavePet = document.getElementById("btnSavePet");
+const alertContainer = document.getElementById("alertContainer");
 const apiUrl = "http://127.0.0.1:5000/pets";
 
 let pets = [];
@@ -52,7 +53,8 @@ const renderPets = async () => {
         <td colspan="5"" align="center">No hay mascotas registradas</td>
       </tr>`;
   } catch (error) {
-    throw error;
+    console.log({ error });
+    alertContainer.classList.add("show");
   }
 };
 const openEditPet = (index) => {
@@ -87,7 +89,8 @@ const submitData = async () => {
       renderPets();
     }
   } catch (error) {
-    throw error;
+    console.log({ error });
+    alertContainer.classList.add("show");
   }
 };
 const deletePet = (index) => {
@@ -102,7 +105,8 @@ const deletePet = (index) => {
         renderPets();
       }
     } catch (error) {
-      throw error;
+      console.log({ error });
+      alertContainer.classList.add("show");
     }
   };
 };

@@ -3,6 +3,27 @@
 }
 .actionsMenu h1 {
   margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+.actionsMenu__content {
+  display: flex;
+  justify-content: space-between;
+}
+.actionsMenu__content > .btn,
+.actionsMenu__content > .alert {
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+}
+.actionsMenu__content > .alert {
+  display: none;
+}
+.actionsMenu__content > .alert.show {
+  display: block;
+}
+.actionsMenu__content > .alert .close {
+  padding: 0.5rem;
 }
 .form-row {
   margin: 10px 0;
