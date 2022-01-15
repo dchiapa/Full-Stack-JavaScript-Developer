@@ -82,9 +82,12 @@ const submitData = async () => {
   }
 };
 const deleteOwner = (index) => {
-  return () => {
-    owners.splice(index, 1);
-    renderOwners();
+  const apiUrlDelete = `${apiUrl}/${index}`;
+  return async () => {
+    const response = await fetch(apiUrlDelete, { method: "DELETE" });
+    if (response.ok) {
+      renderOwners();
+    }
   };
 };
 const closeOwner = () => {
