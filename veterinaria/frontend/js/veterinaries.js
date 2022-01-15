@@ -86,7 +86,7 @@ const submitData = async () => {
       body: JSON.stringify(veterinaryData),
     });
     if (response.ok) {
-      closeVeterinary();
+      clearVeterinaryModal();
       renderVeterinaries();
     }
   } catch (error) {
@@ -110,12 +110,12 @@ const deleteVeterinary = (index) => {
     }
   };
 };
-const closeVeterinary = () => {
+const clearVeterinaryModal = () => {
   formVeterinaryIndex.value = "";
   formVeterinary.reset();
 };
 
 formVeterinary.addEventListener("submit", (e) => e.preventDefault());
 btnSaveVeterinary.addEventListener("click", () => submitData());
-btnCloseVeterinary.addEventListener("click", () => closeVeterinary());
+btnCloseVeterinary.addEventListener("click", () => clearVeterinaryModal());
 renderVeterinaries();
