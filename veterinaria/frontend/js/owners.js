@@ -58,20 +58,28 @@ const openEditOwner = (index) => {
     formOwnerLastName.value = owners[index].lastName;
   };
 };
-const submitData = () => {
+const submitData = async () => {
   const ownerData = {
     document: formOwnerDocument.value,
     firstName: formOwnerFirstName.value,
     lastName: formOwnerLastName.value,
-    country: formOwnerCountry.value,
   };
+  let method = "POST";
+  let apiUrlSend = apiUrl;
   if (formOwnerIndex.value !== "") {
     owners[formOwnerIndex.value] = ownerData;
-  } else {
-    owners.push(ownerData);
+    method = "PUT";
+    apiUrlSend = `${apiUrl}/${formOwnerIndex.value}`;
   }
-  closeOwner();
-  renderOwners();
+  const response = await fetch(apiUrlSend, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(ownerData),
+  });
+  if (response.ok) {
+    closeOwner();
+    renderOwners();
+  }
 };
 const deleteOwner = (index) => {
   return () => {
