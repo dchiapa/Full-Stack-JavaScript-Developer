@@ -117,5 +117,5 @@ const clearPetModal = () => {
 
 formPet.addEventListener("submit", (e) => e.preventDefault());
 btnSavePet.addEventListener("click", () => submitData());
-btnClosePet.addEventListener("click", () => closePet());
+btnClosePet.addEventListener("click", () => clearPetModal());
 renderPets();
