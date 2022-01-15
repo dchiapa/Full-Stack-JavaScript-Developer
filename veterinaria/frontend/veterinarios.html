@@ -73,23 +73,40 @@
       </nav>
       <div class="actionsMenu">
         <h1>Veterinarios</h1>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalVeterinary"
-        >
-          Agregar veterinario
-        </button>
+        <div class="actionsMenu__content">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modalVeterinary"
+          >
+            Agregar veterinario
+          </button>
+          <div
+            class="alert alert-danger alert-dismissible fade"
+            role="alert"
+            id="alertContainer"
+          >
+            <strong>Opps!</strong> Algo hicimos mal, por favor vuelve a
+            intentarlo.
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
       </div>
       <table class="table table-stripped table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Identificación</th>
+            <th scope="col">Documento</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col">Pais</th>
             <th scope="col"></th>
           </tr>
         </thead>
