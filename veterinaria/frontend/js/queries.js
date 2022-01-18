@@ -13,8 +13,9 @@ const renderQueries = async () => {
           (query, index) => `
           <tr>
             <th scope="row">${index}</th>
-            <td>${query.pet}</td>
-            <td>${query.veterinary}</td>
+            <td>${query.pet.name}</td>
+            <td>${query.veterinary.firstName} ${query.veterinary.lastName}</td>
+            <td>${query.diagnosis}</td>
             <td>${query.addedDate}</td>
             <td>${query.editDate}</td>
             <td>
