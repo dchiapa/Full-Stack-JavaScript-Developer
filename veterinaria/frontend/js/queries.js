@@ -1,12 +1,17 @@
 const queriesList = document.getElementById("queriesList");
-const apiUrl = "http://127.0.0.1:5000/queries";
+const petsList = document.getElementById("pets");
+const veterinariesList = document.getElementById("veterinaries");
+
+const apiUrl = "http://127.0.0.1:5000/";
 
 let queries = [];
+let pets = [];
+let veterinaries = [];
 
 const renderQueries = async () => {
   try {
-    const response = await fetch(apiUrl);
-    const queries = await response.json();
+    const response = await fetch(`${apiUrl}queries`);
+    queries = await response.json();
     if (Array.isArray(queries)) {
       const htmlQueries = queries
         .map(
@@ -38,5 +43,40 @@ const renderQueries = async () => {
     console.log({ error });
   }
 };
-
+const renderPets = async () => {
+  try {
+    const response = await fetch(`${apiUrl}pets`);
+    pets = await response.json();
+    if (Array.isArray(pets)) {
+      const htmlPets = pets
+        .map(
+          (pet, index) => `
+          <option value="${index}">${pet.name}</option>`
+        )
+        .join("");
+      petsList.innerHTML += htmlPets;
+    }
+  } catch (error) {
+    console.log({ error });
+  }
+};
+const renderVeterinaries = async () => {
+  try {
+    const response = await fetch(`${apiUrl}veterinaries`);
+    veterinaries = await response.json();
+    if (Array.isArray(veterinaries)) {
+      const htmlVeterinaries = veterinaries
+        .map(
+          (veterinary, index) => `
+          <option value="${index}">${veterinary.firstName} ${veterinary.lastName}</option>`
+        )
+        .join("");
+      veterinariesList.innerHTML += htmlVeterinaries;
+    }
+  } catch (error) {
+    console.log({ error });
+  }
+};
 renderQueries();
+renderPets();
+renderVeterinaries();
