@@ -1,6 +1,6 @@
 const queriesList = document.getElementById("queriesList");
-const petsList = document.getElementById("pets");
-const veterinariesList = document.getElementById("veterinaries");
+const petsList = document.getElementById("queryPets");
+const veterinariesList = document.getElementById("queryVeterinaries");
 
 const apiUrl = "http://127.0.0.1:5000/";
 
