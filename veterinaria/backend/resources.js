@@ -12,9 +12,8 @@ module.exports = {
       pet: 0,
       addedDate: new Date(),
       editDate: null,
-      description:
-        "Se chequeo el estado general, y se aplicaron las vacunas correspondientes",
-      diagnosis: "El animal esta en buen estado",
+      history: "Historia del paciente",
+      diagnosis: "Diagnostico de la consulta",
       veterinary: 0,
     },
   ],
