@@ -19,8 +19,11 @@ module.exports = ({ pets, queries, veterinaries }) => {
         if (queries.length > 0) {
           const queriesRelations = queries.map((query) => ({
             ...query,
-            pet: pets[query.pet],
-            veterinary: veterinaries[query.veterinary],
+            pet: { ...pets[query.pet], id: pets.indexOf(pets[query.pet]) },
+            veterinary: {
+              ...veterinaries[query.veterinary],
+              id: veterinaries.indexOf(veterinaries[query.veterinary]),
+            },
           }));
           return callback(200, queriesRelations);
         }
