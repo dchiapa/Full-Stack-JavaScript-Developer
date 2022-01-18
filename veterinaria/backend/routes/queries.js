@@ -1,4 +1,4 @@
-module.exports = (queries) => {
+module.exports = ({ pets, queries, veterinaries }) => {
   return {
     post: (data, callback) => {
       let newQuery = data.payload;
@@ -17,7 +17,12 @@ module.exports = (queries) => {
         });
       } else {
         if (queries.length > 0) {
-          return callback(200, queries);
+          const queriesRelations = queries.map((query) => ({
+            ...query,
+            pet: pets[query.pet],
+            veterinary: veterinaries[query.veterinary],
+          }));
+          return callback(200, queriesRelations);
         }
         return callback(404, { message: "No hay consultas registradas" });
       }

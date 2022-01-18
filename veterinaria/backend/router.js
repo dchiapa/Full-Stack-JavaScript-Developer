@@ -1,3 +1,4 @@
+const resources = require("./resources");
 const { owners, pets, queries, veterinaries } = require("./resources");
 const ownersRouter = require("./routes/owners");
 const petsRoute = require("./routes/pets");
@@ -8,7 +9,7 @@ module.exports = {
   "": (data, callback) => {
     callback(200, { message: "Estas en /" });
   },
-  queries: queriesRoute(queries),
+  queries: queriesRoute({ pets, queries, veterinaries }),
   owners: ownersRouter(owners),
   pets: petsRoute(pets),
   veterinaries: veterinariesRoute(veterinaries),
