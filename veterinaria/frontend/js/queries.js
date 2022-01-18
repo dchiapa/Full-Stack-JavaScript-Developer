@@ -1,6 +1,9 @@
 const queriesList = document.getElementById("queriesList");
-const petsList = document.getElementById("queryPets");
-const veterinariesList = document.getElementById("queryVeterinaries");
+const formQueryPet = document.getElementById("queryPets");
+const formQueryVeterinary = document.getElementById("queryVeterinaries");
+const formQueryHistory = document.getElementById("queryHistory");
+const formQueryDiagnosis = document.getElementById("queryDiagnosis");
+const formQueryIndex = document.getElementById("queryIndex");
 
 const apiUrl = "http://127.0.0.1:5000/";
 
@@ -25,8 +28,8 @@ const renderQueries = async () => {
             <td>${query.editDate}</td>
             <td>
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-info btnEditVeterinary" data-index=${index} data-toggle="modal"
-                data-target="#modalVeterinary">
+                <button type="button" class="btn btn-info btnEditQuery" data-index=${index} data-toggle="modal"
+                data-target="#modalQuery">
                   <i class="fas fa-edit"></i>
                 </button>
               </div>
@@ -54,7 +57,7 @@ const renderPets = async () => {
           <option value="${index}">${pet.name}</option>`
         )
         .join("");
-      petsList.innerHTML += htmlPets;
+      formQueryPet.innerHTML += htmlPets;
     }
   } catch (error) {
     console.log({ error });
@@ -71,11 +74,20 @@ const renderVeterinaries = async () => {
           <option value="${index}">${veterinary.firstName} ${veterinary.lastName}</option>`
         )
         .join("");
-      veterinariesList.innerHTML += htmlVeterinaries;
+      formQueryVeterinary.innerHTML += htmlVeterinaries;
     }
   } catch (error) {
     console.log({ error });
   }
+};
+const openEditQuery = (index) => {
+  return () => {
+    formQueryIndex.value = index;
+    formQueryPet.value = queries[index].pet.id;
+    formQueryVeterinary.value = queries[index].veterinary.id;
+    formQueryHistory.value = queries[index].history;
+    formQueryDiagnosis.value = queries[index].diagnosis;
+  };
 };
 renderQueries();
 renderPets();
