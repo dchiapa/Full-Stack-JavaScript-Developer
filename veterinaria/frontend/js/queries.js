@@ -100,22 +100,26 @@ const submitData = async () => {
       history: formQueryHistory.value,
       diagnosis: formQueryDiagnosis.value,
     };
-    let method = "POST";
-    let apiUrlSend = `${apiUrl}queries`;
-    if (formQueryIndex.value !== "") {
-      queries[formQueryIndex.value] = queryData;
-      method = "PUT";
-      apiUrlSend = `${apiUrl}queries/${formQueryIndex.value}`;
+    if (validateForm(queryData) === true) {
+      let method = "POST";
+      let apiUrlSend = `${apiUrl}queries`;
+      if (formQueryIndex.value !== "") {
+        queries[formQueryIndex.value] = queryData;
+        method = "PUT";
+        apiUrlSend = `${apiUrl}queries/${formQueryIndex.value}`;
+      }
+      const response = await fetch(apiUrlSend, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(queryData),
+      });
+      if (response.ok) {
+        clearQueryModal();
+        renderQueries();
+      }
+      return;
     }
-    const response = await fetch(apiUrlSend, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(queryData),
-    });
-    if (response.ok) {
-      clearQueryModal();
-      renderQueries();
-    }
+    alert("Por favor, complete todos los campos");
   } catch (error) {
     console.error({ error });
   }
@@ -123,6 +127,13 @@ const submitData = async () => {
 const clearQueryModal = () => {
   formQueryIndex.value = "";
   formQuery.reset();
+};
+const validateForm = (data) => {
+  if (typeof data !== "object") return false;
+  for (let key in data) {
+    if (data[key].length === 0) return false;
+  }
+  return true;
 };
 
 formQuery.addEventListener("submit", (e) => e.preventDefault());
