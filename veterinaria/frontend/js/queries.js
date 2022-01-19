@@ -105,7 +105,7 @@ const submitData = async () => {
     if (formQueryIndex.value !== "") {
       queries[formQueryIndex.value] = queryData;
       method = "PUT";
-      apiUrlSend = `${apiUrl}/${formQueryIndex.value}`;
+      apiUrlSend = `${apiUrl}queries/${formQueryIndex.value}`;
     }
     const response = await fetch(apiUrlSend, {
       method,
