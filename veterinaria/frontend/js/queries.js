@@ -5,6 +5,8 @@ const formQueryVeterinary = document.getElementById("queryVeterinaries");
 const formQueryHistory = document.getElementById("queryHistory");
 const formQueryDiagnosis = document.getElementById("queryDiagnosis");
 const formQueryIndex = document.getElementById("queryIndex");
+const btnCloseOwner = document.getElementById("btnCloseOwner");
+const btnSaveOwner = document.getElementById("btnSaveOwner");
 
 const apiUrl = "http://127.0.0.1:5000/";
 
@@ -25,7 +27,7 @@ const renderQueries = async () => {
             <td>${query.pet.name}</td>
             <td>${query.veterinary.firstName} ${query.veterinary.lastName}</td>
             <td>${query.diagnosis}</td>
-            <td>${query.addedDate}</td>
+            <td>${query.createdDate}</td>
             <td>${query.editDate}</td>
             <td>
               <div class="btn-group" role="group" aria-label="Basic example">
@@ -99,7 +101,7 @@ const submitData = async () => {
       diagnosis: formQueryDiagnosis.value,
     };
     let method = "POST";
-    let apiUrlSend = apiUrl;
+    let apiUrlSend = `${apiUrl}queries`;
     if (formQueryIndex.value !== "") {
       queries[formQueryIndex.value] = queryData;
       method = "PUT";
@@ -123,6 +125,9 @@ const clearQueryModal = () => {
   formQuery.reset();
 };
 
+formQuery.addEventListener("submit", (e) => e.preventDefault());
+btnSaveQuery.addEventListener("click", () => submitData());
+btnCloseQuery.addEventListener("click", () => clearQueryModal());
 renderQueries();
 renderPets();
 renderVeterinaries();
