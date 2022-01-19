@@ -7,6 +7,7 @@ const formQueryDiagnosis = document.getElementById("queryDiagnosis");
 const formQueryIndex = document.getElementById("queryIndex");
 const btnCloseOwner = document.getElementById("btnCloseOwner");
 const btnSaveOwner = document.getElementById("btnSaveOwner");
+const alertContainer = document.getElementById("alertContainer");
 
 const apiUrl = "http://127.0.0.1:5000/";
 
@@ -47,6 +48,7 @@ const renderQueries = async () => {
     }
   } catch (error) {
     console.log({ error });
+    alertContainer.classList.add("show");
   }
 };
 const renderPets = async () => {
@@ -64,6 +66,7 @@ const renderPets = async () => {
     }
   } catch (error) {
     console.log({ error });
+    alertContainer.classList.add("show");
   }
 };
 const renderVeterinaries = async () => {
@@ -81,6 +84,7 @@ const renderVeterinaries = async () => {
     }
   } catch (error) {
     console.log({ error });
+    alertContainer.classList.add("show");
   }
 };
 const openEditQuery = (index) => {
@@ -122,6 +126,7 @@ const submitData = async () => {
     alert("Por favor, complete todos los campos");
   } catch (error) {
     console.error({ error });
+    alertContainer.classList.add("show");
   }
 };
 const clearQueryModal = () => {
