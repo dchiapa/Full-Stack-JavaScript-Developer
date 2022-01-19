@@ -3,7 +3,7 @@ module.exports = ({ pets, queries, veterinaries }) => {
     post: (data, callback) => {
       let newQuery = data.payload;
       newQuery.createdDate = new Date();
-      newQuery.edtiDate = null;
+      newQuery.editDate = null;
       queries = [...queries, newQuery];
       callback(201, data.payload);
     },
