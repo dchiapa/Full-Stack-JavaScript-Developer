@@ -118,6 +118,10 @@ const submitData = async () => {
     console.error({ error });
   }
 };
+const clearQueryModal = () => {
+  formQueryIndex.value = "";
+  formQuery.reset();
+};
 
 renderQueries();
 renderPets();
