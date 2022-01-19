@@ -1,4 +1,5 @@
 const queriesList = document.getElementById("queriesList");
+const formQuery = document.getElementById("formQuery");
 const formQueryPet = document.getElementById("queryPets");
 const formQueryVeterinary = document.getElementById("queryVeterinaries");
 const formQueryHistory = document.getElementById("queryHistory");
@@ -89,6 +90,35 @@ const openEditQuery = (index) => {
     formQueryDiagnosis.value = queries[index].diagnosis;
   };
 };
+const submitData = async () => {
+  try {
+    const queryData = {
+      pet: formQueryPet.value,
+      veterinary: formQueryVeterinary.value,
+      history: formQueryHistory.value,
+      diagnosis: formQueryDiagnosis.value,
+    };
+    let method = "POST";
+    let apiUrlSend = apiUrl;
+    if (formQueryIndex.value !== "") {
+      queries[formQueryIndex.value] = queryData;
+      method = "PUT";
+      apiUrlSend = `${apiUrl}/${formQueryIndex.value}`;
+    }
+    const response = await fetch(apiUrlSend, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(queryData),
+    });
+    if (response.ok) {
+      clearQueryModal();
+      renderQueries();
+    }
+  } catch (error) {
+    console.error({ error });
+  }
+};
+
 renderQueries();
 renderPets();
 renderVeterinaries();
