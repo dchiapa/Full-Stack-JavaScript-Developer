@@ -10,7 +10,7 @@ module.exports = {
   queries: [
     {
       pet: 0,
-      addedDate: new Date(),
+      createdDate: new Date(),
       editDate: null,
       history: "Historia del paciente",
       diagnosis: "Diagnostico de la consulta",
