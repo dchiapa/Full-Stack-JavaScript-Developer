@@ -16,10 +16,14 @@ Las primeras secciones del curso no se han subido, dado que es contenido que ya 
 - [x] #10: Introducción a NODE.
 - [x] #11: Primeros pasos con NODEJS.
 - [x] #12: App veterinaria parte 2: API rest, NODE puro.
+- [x] #13: App veterinaria parte 3: Integración de Backend y Frontend.
 
 ## Proyecto veterinaria
 
 El proyecto se irá transformando durante el curso.
 
-- V1.0: Version en Vanilla JS
+- V1.0: Version en vanilla JS
   - Sin persistencia de datos, los datos son generados por arrays en cada archivo JS.
+- V1.1: Version en vanilla JS
+  - Backend y Frontend separados.
+  - Sin persistencia de datos, los datos originales son almacenados en un archivo en el backend.

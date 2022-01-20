@@ -44,13 +44,13 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="./index.html"> Mascotas </a>
-            </li>
             <li class="nav-item active">
-              <a class="nav-link" href="./veterinarios.html">
-                Veterinarios <span class="sr-only">(current)</span>
+              <a class="nav-link" href="./index.html">
+                Mascotas <span class="sr-only">(current)</span>
               </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./veterinarios.html">Veterinarios</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./consultas.html">Consultas</a>
@@ -72,35 +72,52 @@
         </div>
       </nav>
       <div class="actionsMenu">
-        <h1>Veterinarios</h1>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalVeterinary"
-        >
-          Agregar veterinario
-        </button>
+        <h1>Mascotas</h1>
+        <div class="actionsMenu__content">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modalPet"
+          >
+            Agregar mascota
+          </button>
+          <div
+            class="alert alert-danger alert-dismissible fade"
+            role="alert"
+            id="alertContainer"
+          >
+            <strong>Opps!</strong> Algo hicimos mal, por favor vuelve a
+            intentarlo.
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
       </div>
       <table class="table table-stripped table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Identificación</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Pais</th>
+            <th scope="col">Dueño</th>
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody id="veterinariesList"></tbody>
+        <tbody id="petList"></tbody>
       </table>
     </div>
 
     <!-- Ventana modal -->
     <div
       class="modal fade"
-      id="modalVeterinary"
+      id="modalPet"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -109,7 +126,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Agregar veterinario</h5>
+            <h5 class="modal-title">Agregar mascota</h5>
             <button
               type="button"
               class="close"
@@ -120,24 +137,16 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="formVeterinary">
-              <input type="hidden" id="veterinaryIndex" />
+            <form id="formPet">
+              <input type="hidden" id="petIndex" />
               <div class="form-row">
                 <div class="col">
-                  <input
-                    type="text"
-                    id="veterinaryIdentification"
-                    class="form-control"
-                    placeholder="Identificación"
-                  />
-                </div>
-                <div class="col">
-                  <select class="form-control" id="veterinaryCountry">
-                    <option>País</option>
-                    <option>Argentina</option>
-                    <option>Uruguay</option>
-                    <option>Colombia</option>
-                    <option>Venezuela</option>
+                  <select class="form-control" id="petType">
+                    <option>Tipo de animal</option>
+                    <option>Perro</option>
+                    <option>Gato</option>
+                    <option>Ave</option>
+                    <option>Otro</option>
                   </select>
                 </div>
               </div>
@@ -145,18 +154,19 @@
                 <div class="col">
                   <input
                     type="text"
-                    id="veterinaryFirstName"
+                    id="petName"
                     class="form-control"
                     placeholder="Nombre"
                   />
                 </div>
                 <div class="col">
-                  <input
-                    type="text"
-                    id="veterinaryLastName"
-                    class="form-control"
-                    placeholder="Apellido"
-                  />
+                  <select class="form-control" id="petOwner">
+                    <option>Dueño</option>
+                    <option>Diego</option>
+                    <option>Juan</option>
+                    <option>Pablo</option>
+                    <option>Sebastian</option>
+                  </select>
                 </div>
               </div>
             </form>
@@ -166,7 +176,7 @@
               type="button"
               class="btn btn-secondary"
               data-dismiss="modal"
-              id="btnCloseVeterinary"
+              id="btnClosePet"
             >
               Cerrar
             </button>
@@ -174,7 +184,7 @@
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
-              id="btnSaveVeterinary"
+              id="btnSavePet"
             >
               Guardar cambios
             </button>
@@ -201,6 +211,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- My SCRIPT -->
-    <script src="./js/veterinaries.js"></script>
+    <script src="./js/pets.js"></script>
   </body>
 </html>
