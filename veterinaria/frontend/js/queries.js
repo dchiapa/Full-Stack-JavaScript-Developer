@@ -1,4 +1,5 @@
 const queriesList = document.getElementById("queriesList");
+const modalQuery = document.getElementById("modalQuery");
 const formQuery = document.getElementById("formQuery");
 const formQueryPet = document.getElementById("queryPets");
 const formQueryVeterinary = document.getElementById("queryVeterinaries");
@@ -122,7 +123,9 @@ const submitData = async () => {
         clearQueryModal();
         renderQueries();
       }
-
+      modalQuery.classList.toggle("show");
+      const modalBackdrop = document.querySelector(".modal-backdrop");
+      modalBackdrop.classList.toggle("show");
       return;
     }
     warningAlertContainer.classList.add("show");
