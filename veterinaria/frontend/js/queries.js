@@ -5,9 +5,10 @@ const formQueryVeterinary = document.getElementById("queryVeterinaries");
 const formQueryHistory = document.getElementById("queryHistory");
 const formQueryDiagnosis = document.getElementById("queryDiagnosis");
 const formQueryIndex = document.getElementById("queryIndex");
-const btnCloseOwner = document.getElementById("btnCloseOwner");
-const btnSaveOwner = document.getElementById("btnSaveOwner");
-const alertContainer = document.getElementById("alertContainer");
+const btnCloseQuery = document.getElementById("btnCloseQuery");
+const btnSaveQuery = document.getElementById("btnSaveQuery");
+const errorAlertContainer = document.getElementById("errorAlertContainer");
+const warningAlertContainer = document.getElementById("warningAlertContainer");
 
 const apiUrl = "http://127.0.0.1:5000/";
 
@@ -48,7 +49,7 @@ const renderQueries = async () => {
     }
   } catch (error) {
     console.log({ error });
-    alertContainer.classList.add("show");
+    errorAlertContainer.classList.add("show");
   }
 };
 const renderPets = async () => {
@@ -66,7 +67,7 @@ const renderPets = async () => {
     }
   } catch (error) {
     console.log({ error });
-    alertContainer.classList.add("show");
+    errorAlertContainer.classList.add("show");
   }
 };
 const renderVeterinaries = async () => {
@@ -84,7 +85,7 @@ const renderVeterinaries = async () => {
     }
   } catch (error) {
     console.log({ error });
-    alertContainer.classList.add("show");
+    errorAlertContainer.classList.add("show");
   }
 };
 const openEditQuery = (index) => {
@@ -121,12 +122,13 @@ const submitData = async () => {
         clearQueryModal();
         renderQueries();
       }
+
       return;
     }
-    alert("Por favor, complete todos los campos");
+    warningAlertContainer.classList.add("show");
   } catch (error) {
     console.error({ error });
-    alertContainer.classList.add("show");
+    errorAlertContainer.classList.add("show");
   }
 };
 const clearQueryModal = () => {
@@ -136,7 +138,7 @@ const clearQueryModal = () => {
 const validateForm = (data) => {
   if (typeof data !== "object") return false;
   for (let key in data) {
-    if (data[key].length === 0) return false;
+    if (data[key] === "") return false;
   }
   return true;
 };
