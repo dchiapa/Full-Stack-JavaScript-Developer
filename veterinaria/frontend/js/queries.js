@@ -1,8 +1,8 @@
 const queriesList = document.getElementById("queriesList");
 const modalQuery = document.getElementById("modalQuery");
 const formQuery = document.getElementById("formQuery");
-const formQueryPet = document.getElementById("queryPets");
-const formQueryVeterinary = document.getElementById("queryVeterinaries");
+const formQueryPet = document.getElementById("queryPet");
+const formQueryVeterinary = document.getElementById("queryVeterinary");
 const formQueryHistory = document.getElementById("queryHistory");
 const formQueryDiagnosis = document.getElementById("queryDiagnosis");
 const formQueryIndex = document.getElementById("queryIndex");
@@ -137,13 +137,39 @@ const submitData = async () => {
 const clearQueryModal = () => {
   formQueryIndex.value = "";
   formQuery.reset();
+  formQueryPet.classList.contains("is-invalid") &&
+    formQueryPet.classList.remove("is-invalid");
+  formQueryPet.classList.contains("is-valid") &&
+    formQueryPet.classList.remove("is-valid");
+  formQueryVeterinary.classList.contains("is-invalid") &&
+    formQueryVeterinary.classList.remove("is-invalid");
+  formQueryVeterinary.classList.contains("is-valid") &&
+    formQueryVeterinary.classList.remove("is-valid");
+  formQueryHistory.classList.contains("is-invalid") &&
+    formQueryHistory.classList.remove("is-invalid");
+  formQueryHistory.classList.contains("is-valid") &&
+    formQueryHistory.classList.remove("is-valid");
+  formQueryDiagnosis.classList.contains("is-invalid") &&
+    formQueryDiagnosis.classList.remove("is-invalid");
+  formQueryDiagnosis.classList.contains("is-valid") &&
+    formQueryDiagnosis.classList.remove("is-valid");
+  warningAlertContainer.classList.remove("show");
 };
 const validateForm = (data) => {
-  if (typeof data !== "object") return false;
+  let response = true;
+  if (typeof data !== "object") response = false;
   for (let key in data) {
-    if (data[key] === "") return false;
+    if (data[key] === "") {
+      key = "query" + key.charAt(0).toUpperCase() + key.slice(1);
+      document.getElementById(key).classList.add("is-invalid");
+      response = false;
+    } else {
+      key = "query" + key.charAt(0).toUpperCase() + key.slice(1);
+      document.getElementById(key).classList.remove("is-invalid");
+      document.getElementById(key).classList.add("is-valid");
+    }
   }
-  return true;
+  return response;
 };
 
 formQuery.addEventListener("submit", (e) => e.preventDefault());
