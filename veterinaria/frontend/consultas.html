@@ -85,7 +85,7 @@
           <div
             class="alert alert-danger alert-dismissible fade"
             role="alert"
-            id="alertContainer"
+            id="errorAlertContainer"
           >
             <strong>Opps!</strong> Algo hicimos mal, por favor vuelve a
             intentarlo.
@@ -129,6 +129,22 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Agregar consulta</h5>
+            <div
+              class="alert alert-warning alert-dismissible fade"
+              role="alert"
+              id="warningAlertContainer"
+            >
+              <strong>Ten cuidado!</strong> Por favor, complete todos los
+              campos.
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
             <button
               type="button"
               class="close"
