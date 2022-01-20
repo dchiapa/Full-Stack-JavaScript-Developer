@@ -17,6 +17,7 @@ Las primeras secciones del curso no se han subido, dado que es contenido que ya 
 - [x] #11: Primeros pasos con NODEJS.
 - [x] #12: App veterinaria parte 2: API rest, NODE puro.
 - [x] #13: App veterinaria parte 3: Integración de Backend y Frontend.
+- [ ] #14: Despliegue de App veterinaria en vercel.
 
 ## Proyecto veterinaria
 
