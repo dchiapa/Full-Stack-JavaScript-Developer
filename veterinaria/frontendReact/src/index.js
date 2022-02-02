@@ -1,10 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
+import Pagina from "./components/Pagina";
 import "./index.scss";
 
 const Index = () => (
   <div>
-    <h1>Hola desde react</h1>
+    <Pagina />
   </div>
 );
 
