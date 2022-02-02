@@ -1,8 +1,8 @@
 import React from "react";
-import ActionsMenu from "./ActionsMenu";
-import Modal from "./Modal";
-import Nav from "./Nav";
-import Table from "./Table";
+import ActionsMenu from "./ActionsMenu/ActionsMenu";
+import Modal from "./Modal/Modal";
+import Nav from "./Nav/Nav";
+import Table from "./Table/Table";
 const Pagina = () => {
   return (
     <>
