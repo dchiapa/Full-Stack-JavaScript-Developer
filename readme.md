@@ -30,3 +30,10 @@ El proyecto se irá transformando durante el curso.
 - V1.1: Version en vanilla JS
   - Backend y Frontend separados.
   - Sin persistencia de datos, los datos originales son almacenados en un archivo en el backend.
+- V2.0: Version en React
+  - Backend y Frontend separados.
+  - Sin persistencia de datos, los datos originales son almacenados en un archivo en el backend.
+  - Comandos útiles: (ejecutarlos en la carpeta frontendReact)
+    - npm / yarm i (instalará las dependencias necesarias para el proyecto)
+    - npm / yarm start (ejecutará la versión de desarrollo en el navegador)
+    - npm / yarm build (creará la versión de producción, en la carpeta dist)
